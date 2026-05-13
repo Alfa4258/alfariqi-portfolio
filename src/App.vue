@@ -15,7 +15,7 @@ let timelineObserver = null
 
 const experiences = ref([
   {
-    title: 'Software Developer (Internship)',
+    title: 'Software Developer Intern',
     role: 'PT Labsco Arena Technology',
     meta: 'Aug 2024 - Dec 2024 | South Jakarta',
     tasks: [
@@ -24,7 +24,7 @@ const experiences = ref([
     ],
   },
   {
-    title: 'IT Operational Service (Internship)',
+    title: 'IT Operational Service Intern',
     role: 'PT Sinergi Informatika Semen Indonesia',
     meta: 'Jan 2024 - Jun 2024 | South Jakarta',
     tasks: [

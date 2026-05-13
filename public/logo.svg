@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- The thin grey circle -->
+  <circle cx="50" cy="50" r="38" fill="none" stroke="#80868b" stroke-width="2.5" />
+  
+  <!-- The light grey letter A -->
+  <text x="50" y="50" font-family="Arial, sans-serif" font-size="44" font-weight="normal" fill="#e8eaed" text-anchor="middle" dy=".35em">A</text>
+</svg>
