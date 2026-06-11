@@ -19,50 +19,49 @@ const experiences = ref([
     role: 'PT Labsco Arena Technology',
     meta: 'Aug 2024 - Dec 2024 | South Jakarta',
     tasks: [
-      'Developed a desktop application using Flutter and the Dart language to display and manage data from an RFID reader.',
-      'Integrated Excel-based data import/export and SQLite local storage, enabling seamless offline data handling and synchronization.',
+      'Developed a Flutter-based desktop application for reading and displaying participant data from RFID marathon bib scanners during race events.',
+      'Implemented SQLite and Excel integration for offline data storage, participant data management, and seamless data exchange.',
     ],
   },
   {
-    title: 'IT Operational Service Intern',
+    title: 'Programmer Intern',
     role: 'PT Sinergi Informatika Semen Indonesia',
     meta: 'Jan 2024 - Jun 2024 | South Jakarta',
     tasks: [
-      'Designed and developed the backend system and REST APIs for an internal monitoring dashboard using PHP and the Laravel framework.',
-      'Managed and structured the application database using MySQL, creating schemas and queries to ensure efficient data storage and retrieval for monitoring logs.',
-      'Collaborated with frontend developers using GitHub for version control and integration testing, maintaining consistent communication to ensure seamless connection between REST APIs and user interface components.',
+      'Built backend functionalities and REST APIs using PHP and Laravel, implementing MVC architecture and role-based access control for an internal monitoring platform.',
+      'Designed MySQL database schemas and queries to support application monitoring, reporting, and issue management workflows.',
     ],
   },
 ])
 
 const projects = ref([
   {
-    title: 'RFID Desktop App',
+    title: 'Bib marathon reader',
     description:
-      'A robust desktop application tailored for offline environments, handling real-time RFID data capture with local SQLite caching.',
+      'Desktop application for processing and displaying participant data from RFID marathon bib scanners, with SQLite-based offline data storage.',
     tags: ['Flutter', 'Dart', 'SQLite'],
-    link: 'https://github.com/Alfa4258/project-rfid',
+    link: 'https://github.com/Alfa4258/bib-marathon-reader',
   },
   {
-    title: 'Internal Monitoring Dashboard',
+    title: 'Internal Application Monitoring System',
     description:
-      'Backend infrastructure powering an internal company dashboard. Engineered optimized REST APIs to serve extensive monitoring logs seamlessly.',
+      'Backend system for an internal application monitoring platform, built using Laravel and MySQL with REST APIs and role-based access control.',
     tags: ['PHP', 'Laravel', 'MySQL', 'REST API'],
     link: 'https://github.com/Alfa4258/motoo-backend',
   },
   {
-    title: 'MyTask',
+    title: 'Smart Fridge Food Monitoring',
     description:
-      'This website showcases my transition into front-end styling alongside my backend expertise.',
-    tags: ['Vue.js', 'TypeScript', 'UI/UX'],
-    link: 'https://github.com/Alfa4258/my-task',
+      'IoT-based smart refrigerator system that leverages computer vision to detect food types, estimate freshness, and track inventory quantities, with real-time data synchronization through Firebase.',
+    tags: ['Python', 'TensorFlow', 'OpenCV', 'Firebase'],
+    link: 'https://github.com/Alfa4258/smart-fridge-food-monitoring',
   },
   {
-    title: 'Inventory API',
+    title: 'Smart Fridge Mobile App',
     description:
-      'A scalable RESTful API built to handle thousands of inventory requests per minute with built-in JWT authentication.',
-    tags: ['Node.js', 'Express', 'PostgreSQL'],
-    link: 'https://github.com/yourusername/inventory-api',
+      'Flutter-based mobile application developed to visualize Smart Fridge inventory data, displaying food types, freshness levels, and item quantities retrieved from Firebase.',
+    tags: ['Dart', 'Flutter', 'Firebase'],
+    link: 'https://github.com/yourusername/food-recommendation-app',
   },
 ])
 
@@ -210,14 +209,12 @@ onBeforeUnmount(() => {
         </div>
         <div class="hero-content">
           <p class="hero-kicker">Hi, I'm Ahmad Alfariqi</p>
-          <h1>Entry-Level Web & Software Developer</h1>
           <p class="hero-body">
-            Computer Engineering graduate with a strong foundation in Web Development. Experienced
-            in Laravel, Node.js, and Flutter through involvement in both corporate and independent
-            projects. Seeking an Entry-Level Web Developer position to apply skills in designing
-            REST APIs, database management (SQL/NoSQL), and using Git. Committed to efficient
-            development systems, rapid adaptation to new technologies, and effective team
-            collaboration.
+            Computer Engineering graduate with internship experience in web and software
+            development. Experienced in building backend systems and REST APIs using PHP and
+            Laravel, with a strong understanding of OOP, MVC architecture, and database design
+            using. Familiar with software development best practices and collaborative development
+            workflows, seeking to contribute to scalable and maintainable web applications.
           </p>
         </div>
       </section>
