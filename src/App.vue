@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-const profileImage = ref('/profil.jpg')
+const profileImage = ref('/fotodiri.jpg')
 
 const projectWrapper = ref(null)
 const projectRow = ref(null)
@@ -532,9 +532,8 @@ body {
   height: 100%;
   object-fit: cover;
   /* Grayscale and darken to blend with the dark background */
-  filter: grayscale(100%) brightness(0.7);
-  /* Smooth animation for the color change */
-  transition: filter 0.4s ease;
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
 }
 
 /* When the mouse hovers over the avatar circle, restore the image */
@@ -708,8 +707,8 @@ body {
   transition: color 0.2s ease;
 }
 
-.project-type:hover {
-  color: var(--text-main);
+.project-card:hover .project-type {
+  color: #9bc0ff;
 }
 
 /* --- MINIMAL FOOTER STYLES --- */
