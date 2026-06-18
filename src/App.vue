@@ -1,7 +1,10 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const profileImage = ref('/fotodiri.jpg')
+const THEME_STORAGE_KEY = 'portfolio-theme'
+const theme = ref('dark')
+const isDarkTheme = computed(() => theme.value === 'dark')
 
 const projectWrapper = ref(null)
 const projectRow = ref(null)
@@ -64,6 +67,29 @@ const projects = ref([
     link: 'https://github.com/yourusername/food-recommendation-app',
   },
 ])
+
+const applyTheme = (nextTheme) => {
+  theme.value = nextTheme
+
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', nextTheme)
+    document.documentElement.style.colorScheme = nextTheme
+  }
+
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
+  }
+}
+
+const toggleTheme = () => {
+  applyTheme(isDarkTheme.value ? 'light' : 'dark')
+}
+
+if (typeof window !== 'undefined') {
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY)
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  applyTheme(savedTheme || systemTheme)
+}
 
 onMounted(() => {
   if (projectRow.value) {
@@ -134,6 +160,46 @@ onBeforeUnmount(() => {
         </div>
 
         <div class="header-right">
+          <button
+            type="button"
+            class="theme-toggle"
+            :aria-pressed="!isDarkTheme"
+            :aria-label="isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'"
+            @click="toggleTheme"
+          >
+            <span class="theme-toggle-icon" aria-hidden="true">
+              <svg
+                v-if="isDarkTheme"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5"></circle>
+                <path d="M12 1v2"></path>
+                <path d="M12 21v2"></path>
+                <path d="m4.22 4.22 1.42 1.42"></path>
+                <path d="m18.36 18.36 1.42 1.42"></path>
+                <path d="M1 12h2"></path>
+                <path d="M21 12h2"></path>
+                <path d="m4.22 19.78 1.42-1.42"></path>
+                <path d="m18.36 5.64 1.42-1.42"></path>
+              </svg>
+              <svg
+                v-else
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </span>
+          </button>
           <div class="header-socials">
             <a href="mailto:alfariqi395@gmail.com" aria-label="Email">
               <svg
@@ -388,6 +454,31 @@ onBeforeUnmount(() => {
   --text-muted: #a1a1a1;
   --border: rgba(255, 255, 255, 0.1);
   --card-bg: #222222;
+  --surface-bg: #1f1f1f;
+  --surface-hover: #282828;
+  --surface-strong: #333333;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --card-shadow: rgba(0, 0, 0, 0.5);
+  --accent: #9bc0ff;
+  --toggle-bg: rgba(255, 255, 255, 0.06);
+  --toggle-border: rgba(255, 255, 255, 0.14);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg-color: #f6f7fb;
+  --text-main: #111827;
+  --text-muted: #5b6472;
+  --border: rgba(17, 24, 39, 0.12);
+  --card-bg: #ffffff;
+  --surface-bg: #ffffff;
+  --surface-hover: #eef2ff;
+  --surface-strong: #e8edf7;
+  --shadow: rgba(17, 24, 39, 0.08);
+  --card-shadow: rgba(17, 24, 39, 0.12);
+  --accent: #2563eb;
+  --toggle-bg: rgba(37, 99, 235, 0.08);
+  --toggle-border: rgba(37, 99, 235, 0.18);
 }
 
 * {
@@ -423,12 +514,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1f1f1f;
+  background: var(--surface-bg);
   border: 1px solid var(--border);
   border-radius: 50px;
   padding: 12px 24px;
   width: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px var(--shadow);
   backdrop-filter: blur(10px);
 }
 
@@ -475,6 +566,40 @@ body {
 .header-right {
   display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--toggle-border);
+  border-radius: 999px;
+  background: var(--toggle-bg);
+  color: var(--text-main);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--border);
+}
+
+.theme-toggle-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+}
+
+.theme-toggle-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .header-socials {
@@ -514,8 +639,8 @@ body {
 .avatar {
   width: 200px;
   height: 200px;
-  background: #333;
-  color: #fff;
+  background: var(--surface-strong);
+  color: var(--text-main);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -531,14 +656,13 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Grayscale and darken to blend with the dark background */
-  opacity: 0.4;
-  transition: opacity 0.4s ease;
+  opacity: 1;
+  transition: transform 0.3s ease;
 }
 
-/* When the mouse hovers over the avatar circle, restore the image */
+/* Subtle zoom on hover */
 .avatar:hover .profile-img {
-  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
 }
 
 .hero-kicker {
@@ -667,9 +791,9 @@ body {
 
 .project-card:hover {
   transform: translateY(-8px);
-  background-color: #282828;
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+  background-color: var(--surface-hover);
+  border-color: var(--border);
+  box-shadow: 0 16px 32px var(--card-shadow);
 }
 
 .project-card h3 {
@@ -708,7 +832,7 @@ body {
 }
 
 .project-card:hover .project-type {
-  color: #9bc0ff;
+  color: var(--accent);
 }
 
 /* --- MINIMAL FOOTER STYLES --- */
@@ -753,6 +877,12 @@ body {
 @media (max-width: 768px) {
   .header-left {
     gap: 16px;
+  }
+  .header-right {
+    gap: 8px;
+  }
+  .theme-toggle {
+    padding: 7px 12px;
   }
   .site-nav {
     gap: 16px;
